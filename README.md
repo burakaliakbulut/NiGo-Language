@@ -2,8 +2,7 @@
 
 **NiGo Language**, kullanıcıların İngilizce kelimeleri eğlenerek öğrenmesini amaçlayan bir WPF uygulamasıdır. 6 Sefer Tekrar Prensibi, Wordle oyunu, Quiz ve Hikâye Üretici gibi modüllerle, öğrenme süreci oyunlaştırılarak desteklenir.
 
-👤 Geliştirici
-Adınız: Burak Ali Akbulut,Gokalp Ası
+👤 Geliştiriciler: Burak Ali Akbulut,Gokalp Ası
 GitHub: https://github.com/burakaliakbulut
 İletişim: burakaliakbulut@gmail.com
 
