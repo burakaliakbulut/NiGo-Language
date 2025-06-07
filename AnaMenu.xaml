@@ -1,0 +1,32 @@
+﻿<Window x:Class="NiGoLanguage.AnaMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NiGo Language - Ana Menü"
+        Height="500" Width="350"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Background="#1E1E1E"
+        Foreground="White">
+
+    <Grid>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="220">
+            <TextBlock Text="NiGo Language" FontSize="26" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center" Foreground="#00BCD4"/>
+
+            <!-- XP'ye bağlı olanlar -->
+            <Button x:Name="BtnQuiz" Content="🧠 Quiz" Click="Quiz_Click" Margin="0,5"/>
+            <Button x:Name="BtnSozluk" Content="📖 Sözlük" Click="Sozluk_Click" Margin="0,5"/>
+            <Button x:Name="BtnWordle" Content="🎮 Wordle Oyunu" Click="Wordle_Click" Margin="0,5"/>
+            <Button x:Name="BtnHikaye" Content="📖 Hikaye Oluşturucu" Click="BtnHikaye_Click" Margin="0,5"/>
+            <Button x:Name="BtnFlashcard" Content="📦 Flashcard (XP 500)" Click="BtnFlashcard_Click" Margin="0,5" IsEnabled="False"/>
+
+            <!-- Sabit kalanlar -->
+            <Button x:Name="BtnIstatistik" Content="📊 İstatistik" Click="BtnIstatistik_Click" Margin="0,5"/>
+            <Button x:Name="BtnKelimeEkle" Content="📥 Kelime Ekle" Click="KelimeEkle_Click" Margin="0,5"/>
+            <Button x:Name="BtnAyarlar" Content="⚙ Ayarlar" Click="Ayarlar_Click" Margin="0,5"/>
+            <Button x:Name="BtnCikis" Content="🚪 Çıkış" Click="BtnCikis_Click" Margin="0,20,0,0"/>
+
+            <TextBlock x:Name="txtXpDurumu" FontSize="14" FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,30,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
+    

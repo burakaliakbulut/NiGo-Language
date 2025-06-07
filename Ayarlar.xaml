@@ -1,0 +1,45 @@
+﻿<Window x:Class="NiGoLanguage.Ayarlar"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NiGo Language - Ayarlar"
+        Height="250"
+        Width="350"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E"
+        Foreground="White">
+
+    <Border Background="#2D2D30" CornerRadius="10" Padding="20" Margin="10">
+        <StackPanel HorizontalAlignment="Center">
+
+            <!-- Başlık -->
+            <TextBlock Text="⚙️ Uygulama Ayarları"
+                       FontSize="20"
+                       FontWeight="Bold"
+                       Foreground="#00BCD4"
+                       Margin="0,0,0,20"
+                       TextAlignment="Center"/>
+
+            <!-- Günlük kelime ayarı -->
+            <TextBlock Text="Günlük Gösterilecek Yeni Kelime Sayısı:"/>
+            <TextBox x:Name="txtKelimeSayisi"
+                     Height="30"
+                     Width="120"
+                     Margin="0,5,0,10"
+                     HorizontalContentAlignment="Center"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"/>
+
+            <!-- Kaydet butonu -->
+            <Button Content="💾 Kaydet"
+                    Click="BtnKaydet_Click"
+                    Width="120"
+                    Height="35"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    HorizontalAlignment="Center"/>
+
+        </StackPanel>
+    </Border>
+</Window>

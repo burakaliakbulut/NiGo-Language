@@ -1,0 +1,61 @@
+﻿<Window x:Class="NiGoLanguage.KelimeDuzenle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kelimeyi Düzenle"
+        Height="476"
+        Width="450"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E"
+        Foreground="White">
+
+    <Border Background="#2D2D30" CornerRadius="10" Padding="20" Margin="20">
+        <StackPanel>
+
+            <TextBlock Text="✏️ Kelimeyi Düzenle"
+                       FontSize="22"
+                       FontWeight="Bold"
+                       Foreground="#00BCD4"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <!-- İngilizce -->
+            <TextBlock Text="İngilizce Kelime:"/>
+            <TextBox x:Name="txtIngilizce"
+                     Height="30"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"
+                     Margin="0,5,0,15"/>
+
+            <!-- Türkçe -->
+            <TextBlock Text="Türkçe Karşılığı:"/>
+            <TextBox x:Name="txtTurkce"
+                     Height="30"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"
+                     Margin="0,5,0,15"/>
+
+            <!-- Örnek Cümle -->
+            <TextBlock Text="Örnek Cümle:"/>
+            <TextBox x:Name="txtOrnek"
+                     Height="60"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"
+                     Margin="0,5,0,20"/>
+
+            <!-- Güncelle Butonu -->
+            <Button Content="🔄 Güncelle"
+                    Click="BtnGuncelle_Click"
+                    Height="40"
+                    Width="160"
+                    HorizontalAlignment="Center"
+                    Background="#2196F3"
+                    Foreground="White"
+                    FontWeight="Bold"/>
+        </StackPanel>
+    </Border>
+</Window>

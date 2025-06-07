@@ -1,0 +1,51 @@
+﻿<Window x:Class="NiGoLanguage.KayitSayfasi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NiGo Language - Kayıt Ol"
+        Height="391"
+        Width="400"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E"
+        Foreground="White">
+
+    <Border Background="#2D2D30" CornerRadius="10" Padding="20" Margin="20">
+        <StackPanel>
+
+            <TextBlock Text="👤 Yeni Hesap Oluştur"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#00BCD4"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+
+            <!-- Kullanıcı Adı -->
+            <TextBlock Text="Kullanıcı Adı:"/>
+            <TextBox x:Name="txtKullaniciAdi"
+                     Height="30"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"
+                     Margin="0,5,0,15"/>
+
+            <!-- Şifre -->
+            <TextBlock Text="Şifre:"/>
+            <PasswordBox x:Name="txtSifre"
+                         Height="30"
+                         Background="#3A3D41"
+                         Foreground="White"
+                         BorderBrush="Gray"
+                         Margin="0,5,0,25"/>
+
+            <!-- Kayıt Ol Butonu -->
+            <Button Content="📝 Kayıt Ol"
+                    Click="BtnKayitOl_Click"
+                    Height="40"
+                    Width="150"
+                    HorizontalAlignment="Center"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    FontWeight="Bold"/>
+
+        </StackPanel>
+    </Border>
+</Window>

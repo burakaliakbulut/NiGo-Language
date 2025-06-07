@@ -1,0 +1,58 @@
+﻿<Window x:Class="NiGoLanguage.GirisSayfasi"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="NiGo Language - Giriş"
+        Height="383" Width="400"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E"
+        Foreground="White">
+
+    <Border Background="#2D2D30" CornerRadius="10" Padding="20" Margin="20">
+        <StackPanel>
+
+            <TextBlock Text="NiGo Language"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Foreground="#00BCD4"
+                       Margin="0,0,0,20"/>
+
+            <TextBlock Text="Kullanıcı Adı" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <TextBox x:Name="txtKullaniciAdi"
+                     Height="30"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"
+                     Margin="0,0,0,10"/>
+
+            <TextBlock Text="Şifre" FontSize="14" FontWeight="SemiBold" Margin="0,0,0,5"/>
+            <PasswordBox x:Name="txtSifre"
+                         Height="30"
+                         Background="#3A3D41"
+                         Foreground="White"
+                         BorderBrush="Gray"
+                         Margin="0,0,0,20"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Giriş Yap"
+                Click="BtnGirisYap_Click"
+                        Width="100"
+                        Height="35"
+                        Background="#2196F3"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Margin="5,0"/>
+                <Button Content="Kayıt Ol"
+                        Click="BtnKayitOl_Click"
+                        Width="100"
+                        Height="35"
+                        Background="#4CAF50"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        Margin="5,0"/>
+                
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</Window>

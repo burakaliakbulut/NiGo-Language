@@ -1,0 +1,79 @@
+﻿<Window x:Class="NiGoLanguage.KelimeEkle"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Kelime Ekle"
+        Height="700"
+        Width="500"
+        WindowStartupLocation="CenterScreen"
+        Background="#1E1E1E"
+        Foreground="White">
+
+    <Border Background="#2D2D30" CornerRadius="10" Padding="20" Margin="20">
+        <StackPanel VerticalAlignment="Top">
+
+            <TextBlock Text="📥 Yeni Kelime Ekle"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       Foreground="#00BCD4"
+                       Margin="0,0,0,20"
+                       HorizontalAlignment="Center"/>
+
+            <!-- İngilizce -->
+            <TextBlock Text="İngilizce Kelime:"/>
+            <TextBox x:Name="txtIngilizce"
+                     Height="30"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"
+                     Margin="0,5,0,15"/>
+
+            <!-- Türkçe -->
+            <TextBlock Text="Türkçe Karşılığı:"/>
+            <TextBox x:Name="txtTurkce"
+                     Height="30"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"
+                     Margin="0,5,0,15"/>
+
+            <!-- Örnek Cümle -->
+            <TextBlock Text="Örnek Cümle:"/>
+            <TextBox x:Name="txtOrnekCumle"
+                     Height="30"
+                     Background="#3A3D41"
+                     Foreground="White"
+                     BorderBrush="Gray"
+                     Margin="0,5,0,15"/>
+
+            <!-- Resim Seç -->
+            <TextBlock Text="Resim Seç veya otomatik oluştur:"/>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,15">
+                <TextBox x:Name="txtResimYolu"
+                         Width="300"
+                         IsReadOnly="True"
+                         Background="#3A3D41"
+                         Foreground="White"
+                         BorderBrush="Gray"/>
+                <Button Content="..." Width="40" Click="BtnResimSec_Click" Margin="10,0"/>
+            </StackPanel>
+
+            <!-- Görsel Önizleme -->
+            <Border BorderThickness="1" BorderBrush="Gray" CornerRadius="4" Margin="0,0,0,15">
+                <Image x:Name="imgOnizleme"
+                       Height="150"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Center"/>
+            </Border>
+
+            <!-- Kaydet Butonu -->
+            <Button Content="💾 Kelimeyi Kaydet"
+                    Height="40"
+                    Width="200"
+                    HorizontalAlignment="Center"
+                    Background="#4CAF50"
+                    Foreground="White"
+                    FontWeight="Bold"
+                    Click="BtnKaydet_Click"/>
+        </StackPanel>
+    </Border>
+</Window>
