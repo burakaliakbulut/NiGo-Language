@@ -96,6 +96,6 @@ namespace NiGoLanguage
         {
             this.Close();
         }
-
+        
     }
 }

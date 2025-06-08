@@ -9,7 +9,7 @@
         Foreground="White">
 
     <Grid>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="220">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="230">
             <TextBlock Text="NiGo Language" FontSize="26" FontWeight="Bold" Margin="0,0,0,20" HorizontalAlignment="Center" Foreground="#00BCD4"/>
 
             <!-- XP'ye bağlı olanlar -->
