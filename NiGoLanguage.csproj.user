@@ -32,6 +32,9 @@
     <Compile Update="Quiz.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="SifreSıfırlaSayfasi.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Sozluk.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

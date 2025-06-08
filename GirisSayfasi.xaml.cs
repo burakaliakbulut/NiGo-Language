@@ -1,5 +1,6 @@
 ﻿using MongoDB.Driver;
 using System.Windows;
+using System.Windows.Input;
 
 namespace NiGoLanguage;
 
@@ -39,4 +40,12 @@ public partial class GirisSayfasi : Window
         }
 
     }
+    private void SifreUnuttum_Click(object sender, MouseButtonEventArgs e)
+    {
+        MessageBox.Show("Lütfen kayıtlı olduğunuz e-posta adresiyle destek birimine başvurun.\n\nBu özellik henüz uygulamada aktif değil.",
+                        "Şifremi Unuttum",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+    }
+
 }

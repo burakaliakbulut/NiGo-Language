@@ -1,9 +1,10 @@
-﻿using MongoDB.Driver;
+﻿using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using System.Speech.Synthesis;
+using System.Windows;
 
 namespace NiGoLanguage
 {
@@ -14,6 +15,8 @@ namespace NiGoLanguage
         private int gunlukKelimeLimiti = 10;
         private int sorulanKelimeSayisi = 0;
         private IKelimeRepository kelimeRepo = new MongoKelimeRepository();
+        private readonly SpeechSynthesizer synthesizer = new SpeechSynthesizer();
+
 
         private static readonly TimeSpan[] tekrarAraliklari = new[]
         {
@@ -34,37 +37,73 @@ namespace NiGoLanguage
         private async void Quiz_Loaded(object sender, RoutedEventArgs e)
         {
             await AyariYukle();
+            this.Loaded += Quiz_Loaded;
             SoruGetir();
         }
         private void KelimeyiOku(string ingilizceKelime)
         {
-            SpeechSynthesizer synthesizer = new SpeechSynthesizer();
-            synthesizer.SelectVoiceByHints(VoiceGender.NotSet, VoiceAge.Adult, 0, new System.Globalization.CultureInfo("en-US"));
-            synthesizer.SpeakAsync(ingilizceKelime);
+            {
+                synthesizer.SelectVoiceByHints(VoiceGender.NotSet, VoiceAge.Adult, 0, new System.Globalization.CultureInfo("en-US"));
+                synthesizer.SpeakAsync(ingilizceKelime);
+            }
+
         }
 
         private async void SoruGetir()
         {
-            var kelimeler = await kelimeRepo.OgrenilmemisleriGetirAsync();
             if (sorulanKelimeSayisi >= gunlukKelimeLimiti)
             {
-                MessageBox.Show("Bugünkü günlük tekrar hedefinize ulaştınız!");
+                MessageBox.Show("Bugünlük kelime sınırına ulaştınız!");
                 this.Close();
                 return;
             }
-            if (!kelimeler.Any())
+            var tumKelimeler = await kelimeRepo.OgrenilmemisleriGetirAsync();
+            var uygunKelimeler = new List<Kelime>();
+
+            foreach (var kelime in tumKelimeler)
             {
-                MessageBox.Show("Çözülecek kelime kalmadı!");
+                var cozum = await VeritabaniYardimcisi.KelimeCozumler
+                    .Find(x => x.KelimeId == kelime.Id && x.KullaniciAdi == kullaniciAdi)
+                    .FirstOrDefaultAsync();
+
+                int tekrarIndex = cozum?.DogruCozumTarihleri?.Count ?? 0;
+                if (tekrarIndex >= 6)
+                    continue;
+
+                if (cozum == null || tekrarIndex == 0)
+                {
+                    uygunKelimeler.Add(kelime); // hiç çözülmemiş kelime
+                }
+                else
+                {
+                    var sonCozumTarihi = cozum.DogruCozumTarihleri.Last();
+                    var tekrarZamani = tekrarAraliklari[tekrarIndex];
+                    if (DateTime.Now - sonCozumTarihi >= tekrarZamani)
+                    {
+                        uygunKelimeler.Add(kelime); // zamanı gelmiş tekrar
+                    }
+                }
+            }
+
+            if (!uygunKelimeler.Any())
+            {
+                MessageBox.Show("Bugünlük tekrar edecek kelime yok.");
                 this.Close();
                 return;
             }
 
             var rnd = new Random();
-            mevcutKelime = kelimeler[rnd.Next(kelimeler.Count)];
-            txtSoru.Text = $"Kelime telaffuz ediliyor... \nTürkçe karşılığını yazın:";
-            KelimeyiOku(mevcutKelime.Ingilizce); // 🔈 Sesli okuma
+            Kelime yeniKelime;
+            do
+            {
+                yeniKelime = uygunKelimeler[rnd.Next(uygunKelimeler.Count)];
+            } while (uygunKelimeler.Count > 1 && yeniKelime.Id == mevcutKelime?.Id);
 
+            mevcutKelime = yeniKelime;
+            txtSoru.Text = $"Kelime telaffuz ediliyor...\nTürkçe karşılığını yazın:";
+            KelimeyiOku(mevcutKelime.Ingilizce);
         }
+
         private async Task XpEkle(int miktar)
         {
             var filtre = Builders<KullaniciAyar>.Filter.Eq(x => x.KullaniciAdi, kullaniciAdi);
@@ -85,13 +124,14 @@ namespace NiGoLanguage
         private async void BtnCevapla_Click(object sender, RoutedEventArgs e)
         {
             var cevap = txtCevap.Text.Trim().ToLower();
-            if (cevap == mevcutKelime.Turkce.ToLower())
+            bool dogruMu = cevap == mevcutKelime.Turkce.ToLower(); // İngilizce kelime veriliyor, Türkçesi isteniyor.
+
+            var filtre = Builders<KelimeCozum>.Filter.Eq(x => x.KelimeId, mevcutKelime.Id) &
+                         Builders<KelimeCozum>.Filter.Eq(x => x.KullaniciAdi, kullaniciAdi);
+            var cozum = await VeritabaniYardimcisi.KelimeCozumler.Find(filtre).FirstOrDefaultAsync();
+
+            if (dogruMu)
             {
-                var filtre = Builders<KelimeCozum>.Filter.Eq(x => x.KelimeId, mevcutKelime.Id) &
-                             Builders<KelimeCozum>.Filter.Eq(x => x.KullaniciAdi, kullaniciAdi);
-
-                var cozum = await VeritabaniYardimcisi.KelimeCozumler.Find(filtre).FirstOrDefaultAsync();
-
                 if (cozum == null)
                 {
                     cozum = new KelimeCozum
@@ -116,25 +156,41 @@ namespace NiGoLanguage
                     var guncelle = Builders<Kelime>.Update.Set(k => k.Ogrenildi, true);
                     await VeritabaniYardimcisi.Kelimeler.UpdateOneAsync(kelimeFiltre, guncelle);
 
-                    await XpEkle(50); // 🎯 5 kelime öğrenince +50 XP
+                    await XpEkle(50);
                     MessageBox.Show("Tebrikler! Bu kelime artık öğrenildi. +50 XP kazandınız!");
                 }
                 else
                 {
-                    await XpEkle(10); // her doğru cevapta +10 XP
+                    await XpEkle(10);
                     MessageBox.Show($"Doğru! ({tekrarSayisi}/6 tekrar yapıldı)");
-                    
                 }
-
-                txtCevap.Clear();
-                SoruGetir();
             }
             else
             {
-                MessageBox.Show($"Yanlış cevap. Doğru cevap: {mevcutKelime.Ingilizce}");
-                txtCevap.Clear();
-                SoruGetir();
+                if (cozum == null)
+                {
+                    cozum = new KelimeCozum
+                    {
+                        KelimeId = mevcutKelime.Id,
+                        KullaniciAdi = kullaniciAdi,
+                        YanlisCozumTarihleri = new List<DateTime> { DateTime.Now }
+                    };
+                    await VeritabaniYardimcisi.KelimeCozumler.InsertOneAsync(cozum);
+                }
+                else
+                {
+                    cozum.YanlisCozumTarihleri.Add(DateTime.Now);
+                    await VeritabaniYardimcisi.KelimeCozumler.ReplaceOneAsync(filtre, cozum);
+                }
+
+                MessageBox.Show($"Yanlış cevap. Doğru cevap: {mevcutKelime.Turkce}");
             }
+
+            txtCevap.Clear();
+            sorulanKelimeSayisi++;
+            SoruGetir();
         }
+
+
     }
 }

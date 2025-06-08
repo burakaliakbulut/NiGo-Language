@@ -17,4 +17,8 @@ public class KelimeCozum
 
     [BsonElement("dogruCozumTarihleri")]
     public List<DateTime> DogruCozumTarihleri { get; set; } = new List<DateTime>();
+
+    [BsonElement("YanlisCozumTarihleri")]
+    public List<DateTime> YanlisCozumTarihleri { get; set; } = new List<DateTime>();
+
 }
