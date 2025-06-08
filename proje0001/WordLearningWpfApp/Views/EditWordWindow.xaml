@@ -1,0 +1,67 @@
+<views:BaseWindow x:Class="WordLearningWpfApp.Views.EditWordWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:views="clr-namespace:WordLearningWpfApp.Views"
+        mc:Ignorable="d"
+        Title="Kelimeyi Düzenle" Height="400" Width="600"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Form -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBox Text="{Binding EnglishWord, UpdateSourceTrigger=PropertyChanged}"
+                     materialDesign:HintAssist.Hint="İngilizce Kelime"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     Margin="0,0,0,16"/>
+
+            <TextBox Text="{Binding TurkishWord, UpdateSourceTrigger=PropertyChanged}"
+                     materialDesign:HintAssist.Hint="Türkçe Kelime"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     Margin="0,0,0,16"/>
+
+            <ComboBox materialDesign:HintAssist.Hint="Zorluk Seviyesi"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                      SelectedItem="{Binding Difficulty}">
+                <ComboBoxItem Content="Kolay"/>
+                <ComboBoxItem Content="Orta"/>
+                <ComboBoxItem Content="Zor"/>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Butonlar -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Geri"
+                    Command="{Binding BackCommand}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Margin="0,0,8,0"/>
+
+            <Button Content="Kaydet"
+                    Command="{Binding SaveCommand}"
+                    Style="{StaticResource MaterialDesignRaisedButton}"/>
+        </StackPanel>
+
+        <!-- Loading Indicator -->
+        <ProgressBar
+            Style="{StaticResource MaterialDesignCircularProgressBar}"
+            Value="0"
+            IsIndeterminate="True"
+            Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Width="48"
+            Height="48"
+            Grid.RowSpan="2"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
+    </Grid>
+</views:BaseWindow> 

@@ -1,0 +1,16 @@
+C:\Users\burak\source\repos\arayüz1\arayüz1\bin\Debug\net6.0-windows\arayüz1.exe
+C:\Users\burak\source\repos\arayüz1\arayüz1\bin\Debug\net6.0-windows\arayüz1.deps.json
+C:\Users\burak\source\repos\arayüz1\arayüz1\bin\Debug\net6.0-windows\arayüz1.runtimeconfig.json
+C:\Users\burak\source\repos\arayüz1\arayüz1\bin\Debug\net6.0-windows\arayüz1.dll
+C:\Users\burak\source\repos\arayüz1\arayüz1\bin\Debug\net6.0-windows\arayüz1.pdb
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.Form1.resources
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.csproj.GenerateResource.cache
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.AssemblyInfoInputs.cache
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.AssemblyInfo.cs
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.csproj.CoreCompileInputs.cache
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.dll
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\refint\arayüz1.dll
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.pdb
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\arayüz1.genruntimeconfig.cache
+C:\Users\burak\source\repos\arayüz1\arayüz1\obj\Debug\net6.0-windows\ref\arayüz1.dll

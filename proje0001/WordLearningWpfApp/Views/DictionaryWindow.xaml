@@ -1,0 +1,104 @@
+<views:BaseWindow x:Class="WordLearningWpfApp.Views.DictionaryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:views="clr-namespace:WordLearningWpfApp.Views"
+        mc:Ignorable="d"
+        Title="Sözlük" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Başlık ve Butonlar -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Sözlük"
+                      Style="{StaticResource MaterialDesignHeadline5TextBlock}"/>
+
+            <Button Grid.Column="1"
+                    Content="Geri"
+                    Command="{Binding BackCommand}"
+                    Style="{StaticResource MaterialDesignFlatButton}">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ArrowLeft" Margin="0,0,8,0"/>
+                            <TextBlock Text="Geri"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </Grid>
+
+        <!-- Arama -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                     materialDesign:HintAssist.Hint="Kelime ara..."
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"/>
+
+            <Button Grid.Column="1"
+                    Content="Ara"
+                    Command="{Binding SearchCommand}"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    Margin="8,0,0,0">
+                <Button.ContentTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="Search" Margin="0,0,8,0"/>
+                            <TextBlock Text="Ara"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </Button.ContentTemplate>
+            </Button>
+        </Grid>
+
+        <!-- Sonuçlar -->
+        <materialDesign:Card Grid.Row="2" Padding="16">
+            <DataGrid ItemsSource="{Binding Words}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      materialDesign:DataGridAssist.CellPadding="13 8 8 8"
+                      materialDesign:DataGridAssist.ColumnHeaderPadding="8">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Kelime" Binding="{Binding Word}"/>
+                    <DataGridTextColumn Header="Anlam" Binding="{Binding Meaning}"/>
+                    <DataGridTextColumn Header="Örnek Cümle" Binding="{Binding Example}"/>
+                    <DataGridTextColumn Header="Kategori" Binding="{Binding Category}"/>
+                    <DataGridTextColumn Header="Zorluk" Binding="{Binding DifficultyLevel}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
+
+        <!-- Loading Indicator -->
+        <ProgressBar
+            Style="{StaticResource MaterialDesignCircularProgressBar}"
+            Value="0"
+            IsIndeterminate="True"
+            Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+            Width="48"
+            Height="48"
+            Grid.RowSpan="3"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"/>
+    </Grid>
+</views:BaseWindow> 
