@@ -47,5 +47,6 @@ public partial class GirisSayfasi : Window
                         MessageBoxButton.OK,
                         MessageBoxImage.Information);
     }
+    
 
 }
