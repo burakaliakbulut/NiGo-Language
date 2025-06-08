@@ -35,21 +35,6 @@ namespace NiGoLanguage
                 OrnekCumle = txtOrnekCumle.Text.Trim()
             };
 
-            if (string.IsNullOrWhiteSpace(kelime.OrnekCumle) || string.IsNullOrWhiteSpace(kelime.Turkce))
-            {
-                var (enCumle, trCeviri) = await OrnekCumleOlusturucu.CumleVeCeviriGetir(kelime.Ingilizce);
-
-                if (string.IsNullOrWhiteSpace(kelime.OrnekCumle))
-                    kelime.OrnekCumle = enCumle ?? "No sentence generated.";
-
-                if (string.IsNullOrWhiteSpace(kelime.Turkce))
-                    kelime.Turkce = trCeviri ?? "Çeviri bulunamadı.";
-            }
-            if (string.IsNullOrWhiteSpace(kelime.OrnekCumle))
-            {
-                kelime.OrnekCumle = await OrnekCumleOlusturucu.OrnekCumleGetir(kelime.Ingilizce)
-                                     ?? "No example generated.";
-            }
             // Kullanıcı resim seçmemişse AI ile getir
             if (string.IsNullOrWhiteSpace(txtResimYolu.Text))
             {
